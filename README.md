@@ -6,7 +6,7 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
 ## Prerequisites
 1. **Home Assistant** – Make sure you have a working Home Assistant instance.
 2. **anova_server** – Install and configure the [anova_server](https://github.com/RoyOltmans/anova_server). Refer to its documentation for setup instructions. Once configured, it provides the necessary REST endpoints and sensors for this Lovelace panel to function.
-3. **Required Entities & Scripts** – Ensure that your `sensor.anova_temperature`, `sensor.anova_target_temperature`, `sensor.anova_status`, `timer.anova_timer`, `input_number.anova_target_temperature_selector`, and `input_datetime.anova_time_picker` are set up. Additionally, you should have `script.start_anova_precision_cooker` and `script.stop_anova_precision_cooker` scripts that interact with the anova_server.
+3. **Required Entities & Scripts** – Ensure that your `sensor.anova_temperature`, `sensor.anova_target_temperature`, `sensor.anova_status`, `timer.anova_timer`, `input_number.anova_target_temperature_selector`, and `input_datetime.anova_time_picker` are set up. Additionally, you should have `script.start_anova_precision_cooker`, `script.stop_anova_precision_cooker`, and `script.set_sous_vide_recipe` scripts that interact with the anova_server.
 
 ## Installation
 1. **Lovelace Setup** – Navigate to the `config` directory of your Home Assistant setup.
@@ -61,7 +61,7 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
             type: module
         ```
 
-4. **Add the following configuration** to your `ui-lovelace.yaml` (or via the UI). **This example includes two vertical stacks: one for the Anova controller and one for recipes, plus an ApexCharts card.**
+4. **Add the following configuration** to your `ui-lovelace.yaml` (or via the UI). This example includes a panel for controlling the Anova Precision Cooker, a recipe section (with placeholders), and an ApexCharts card.
 
    ```yaml
    title: Cooking
@@ -146,12 +146,13 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
              seconds: false
              icon: false
            name: Anova Duration
+
      - type: vertical-stack
        cards:
          - type: markdown
            content: |
              # Sous Vide Recipes
-             Select a recipe to automatically set the Anova Precision Cooker.
+             Replace the example placeholders with your own images, temperatures, and durations.
          - type: entities
            entities:
              - entity: input_select.anova_recipe
@@ -161,122 +162,42 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
            columns: 2
            cards:
              - type: picture
-               image: /local/assets/images/recipes/steak.png
+               image: /local/assets/images/recipes/recipe_image.png
                tap_action:
                  action: call-service
                  service: script.set_sous_vide_recipe
                  data:
-                   temperature: 54.5
-                   duration: 90
-               name: Steak (Medium-Rare)
+                   temperature: 00.0  # float temperature in Celsius
+                   duration: 000      # time in minutes or seconds
+               name: Example Recipe 1
              - type: picture
-               image: /local/assets/images/recipes/chicken.png
+               image: /local/assets/images/recipes/recipe_image.png
                tap_action:
                  action: call-service
                  service: script.set_sous_vide_recipe
                  data:
-                   temperature: 63
-                   duration: 120
-               name: Chicken Breast
+                   temperature: 00.0
+                   duration: 000
+               name: Example Recipe 2
              - type: picture
-               image: /local/assets/images/recipes/salmon.png
+               image: /local/assets/images/recipes/recipe_image.png
                tap_action:
                  action: call-service
                  service: script.set_sous_vide_recipe
                  data:
-                   temperature: 50
-                   duration: 45
-               name: Salmon
+                   temperature: 00.0
+                   duration: 000
+               name: Example Recipe 3
              - type: picture
-               image: /local/assets/images/recipes/eggs.png
+               image: /local/assets/images/recipes/recipe_image.png
                tap_action:
                  action: call-service
                  service: script.set_sous_vide_recipe
                  data:
-                   temperature: 75
-                   duration: 13
-               name: Eggs (Soft-Boiled)
-             - type: picture
-               image: /local/assets/images/recipes/carrots.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 84
-                   duration: 60
-               name: Glazed Carrots
-             - type: picture
-               image: /local/assets/images/recipes/halibut.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 60
-                   duration: 40
-               name: Butter-Basted Halibut
-             - type: picture
-               image: /local/assets/images/recipes/duck.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 74
-                   duration: 2160
-               name: Duck Confit
-             - type: picture
-               image: /local/assets/images/recipes/chicken_wing.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 74
-                   duration: 60
-               name: Buffalo Chicken Wings
-             - type: picture
-               image: /local/assets/images/recipes/corn.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 84
-                   duration: 30
-               name: Corn on the Cob
-             - type: picture
-               image: /local/assets/images/recipes/porkchop.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 60
-                   duration: 90
-               name: Pork Chops
-             - type: picture
-               image: /local/assets/images/recipes/lamb.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 55
-                   duration: 1440
-               name: Leg of Lamb
-             - type: picture
-               image: /local/assets/images/recipes/lobster.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 60
-                   duration: 45
-               name: Lobster Tails
-             - type: picture
-               image: /local/assets/images/recipes/porkribs.png
-               tap_action:
-                 action: call-service
-                 service: script.set_sous_vide_recipe
-                 data:
-                   temperature: 62.8
-                   duration: 2880
-               name: Beef Short Ribs
+                   temperature: 00.0
+                   duration: 000
+               name: Example Recipe 4
+
      - type: vertical-stack
        cards:
          - type: custom:apexcharts-card
@@ -289,6 +210,8 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
              - entity: sensor.anova_target_temperature
                type: column
    ```
+
+   > **Note:** In the recipe grid, you can add as many picture cards as you need for different recipes. Update the `image`, `temperature`, `duration`, and `name` fields according to your preferences. Make sure the images are placed under `/config/www/assets/images/recipes/` or an equivalent path.
 
 5. **Save** the file and refresh your Lovelace UI.
 6. Ensure that any referenced images and custom cards are correctly installed and accessible in the `/local/` directory.
@@ -337,6 +260,45 @@ sequence:
     target:
       entity_id: timer.anova_timer
 ```
+
+## Sample Script for Setting a Sous Vide Recipe
+Below is an example of how your `script.set_sous_vide_recipe` might look in `scripts.yaml`. It sets the target temperature and cooking duration based on the service call data, updates an input_number and input_datetime, and then optionally makes REST calls to anova_server:
+
+```yaml
+description: Set Sous Vide Recipe
+icon: mdi:chef-hat
+alias: Set Sous Vide Recipe
+fields:
+  temperature:
+    description: Temperature in Celsius
+    required: true
+    example: 62.8
+  duration:
+    description: Duration in hours
+    required: true
+    example: 48
+sequence:
+  - service: input_number.set_value
+    target:
+      entity_id: input_number.anova_target_temperature_selector
+    data:
+      value: "{{ temperature | float }}"
+  - service: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.anova_time_picker
+    data:
+      time: >-
+        {{ '%02d:%02d:%02d' % ((duration | int) // 60, (duration | int) % 60, 0) }}
+  - service: rest_command.set_anova_temperature
+    data:
+      temperature: "{{ temperature | float }}"
+  - service: rest_command.set_anova_timer
+    enabled: false
+    data:
+      minutes: "{{ duration | int }}"
+```
+
+> **Note:** The last step (REST commands) is disabled by default (`enabled: false`), in case you prefer to manage timers or calls differently.
 
 ## Usage
 1. Make sure your `anova_server` is running and integrated properly with Home Assistant.
