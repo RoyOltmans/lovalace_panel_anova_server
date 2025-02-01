@@ -315,7 +315,10 @@ sequence:
 Contributions are welcome. Please open an issue or pull request if you have suggestions or improvements.
 
 ## License
-Specify the license under which the project is distributed.
+This project is licensed under the MIT License. See LICENSE for details. The other codes are on their corresponding licenses please check theirs if needed.
+
+## Disclaimer
+localace_panel_anova_server itself and the associated Python script are distributed under the MIT License and their corresponding licenses. While every effort has been made to ensure the safety and security of this code, you use it at your own risk. Configure the script and card securely to avoid exposing sensitive data. Performance may vary depending on the size and structure of your filesystem.
 
 ## Contact
 Provide contact details for further questions or contributions.
