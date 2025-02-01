@@ -17,6 +17,7 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
 1. **Home Assistant** – Make sure you have a working Home Assistant instance.
 2. **anova_server** – Install and configure the [anova_server](https://github.com/RoyOltmans/anova_server). Refer to its documentation for setup instructions. Once configured, it provides the necessary REST endpoints and sensors for this Lovelace panel to function.
 3. **Required Entities & Scripts** – Ensure that your `sensor.anova_temperature`, `sensor.anova_target_temperature`, `sensor.anova_status`, `timer.anova_timer`, `input_number.anova_target_temperature_selector`, and `input_datetime.anova_time_picker` are set up. Additionally, you should have `script.start_anova_precision_cooker`, `script.stop_anova_precision_cooker`, and `script.set_sous_vide_recipe` scripts that interact with the anova_server.
+4. You will need to add your own assets (see /local/[assets/images/XXXX.png]) to not conflict with any copyrights of owners.
 
 ## Installation
 1. **Lovelace Setup** – Navigate to the `config` directory of your Home Assistant setup.
