@@ -88,15 +88,21 @@ This Lovelace panel allows you to control and monitor the Anova Precision Cooker
              Select a recipe to automatically set the Anova Precision Cooker.
          - type: picture
            image: /local/assets/images/devices/anova_precision_sous_vide_wd_rt.png
-         - type: gauge
-           entity: sensor.anova_temperature
-           name: Current Temperature
-           min: 0
-           max: 100
-           severity:
-             green: 50
-             yellow: 60
-             red: 80
+         - type: conditional
+           conditions:
+             - condition: state
+               entity: sensor.anova_temperature_numeric
+               state: unknown
+           card:
+             type: gauge
+             entity: sensor.anova_temperature_numeric
+             name: Current Temperature
+             min: 0
+             max: 100
+             severity:
+               green: 50
+               yellow: 60
+               red: 80
          - type: horizontal-stack
            cards:
              - show_name: true
